@@ -1,0 +1,39 @@
+{
+  "name": "geojson-projector",
+  "version": "0.0.0",
+  "description": "Fast projector for immutable geojson",
+  "main": "./dist/geojson-projector.js",
+  "scripts": {
+    "eslint": "eslint .",
+    "build:source": "babel source --presets babel-preset-es2015 --out-dir dist",
+    "build:tests": "babel test --presets babel-preset-es2015 --out-dir test-dist",
+    "build": "npm run build:source && npm run build:tests",
+    "test": "node node_modules/mocha/bin/mocha --reporter spec test-dist/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kudla/geojson-projector.git"
+  },
+  "keywords": [
+    "geojson",
+    "immutable",
+    "projection"
+  ],
+  "author": "Artem Kudla <a.v.xdev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kudla/geojson-projector/issues"
+  },
+  "homepage": "https://github.com/kudla/geojson-projector#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "sinon": "^2.3.5"
+  },
+  "dependencies": {
+    "proj4": "^2.4.3"
+  }
+}
