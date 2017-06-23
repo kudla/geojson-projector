@@ -29,20 +29,78 @@ describe('GeojsonProjector', () => {
         expect(projecctor2).not.equal(projector1);
     });
 
-    it('should return same projection instances for same input', () => {
-        let from = 'EPSG:4326';
-        let to = 'EPSG:3857';
-        let projector = GeojsonProjector(from, to);
-        let geojson = {
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: [30, 30]
-            }
-        };
-        let projection1 = projector(geojson);
-        let projection12= projector(geojson);
+    let cases = [
+        'coordinate',
+        'coordinate set',
+        'coordinate multiset',
+        'point',
+        'line-string',
+        'polygon',
+        'feature',
+        'feature collection'
+    ];
+    let projections = ['EPSG:3857'];
+    cases.forEach(sourceCase => {
+        describe(`${sourceCase}`, () => {
+            let source;
+            beforeEach(() => {
+                source = require(`../test/cases/${sourceCase}/source`);
+            });
+            projections.forEach(projectTo => {
+                describe(`to ${projectTo} projection`, () => {
+                    let projector;
+                    let expectedProjection;
 
-        expect(projection12).to.equal(projection1);
+                    beforeEach(() => {
+                        expectedProjection = require(`../test/cases/${sourceCase}/${projectTo.replace(':', '-').toLowerCase()}`);
+                    });
+
+                    describe('imutable input', () => {
+                        beforeEach(() => {
+                            projector = GeojsonProjector('EPSG:4326', projectTo);
+                        });
+                        it ('should return same projected instance for same input instance', () => {
+                            let projection1 = projector(source);
+                            let projection2 = projector(source);
+                            expect(projection2).to.equal(projection1);
+                        });
+
+                        it('should return same projected values for same input values', () => {
+                            let projection1 = projector(source);
+                            let projection2 = projector(source instanceof Array ? source.slice() : {...source});
+                            expect(projection2).deep.equal(projection1);
+                        });
+
+                        it('should produce valid projections', () => {
+                            let projection = projector(source);
+                            expect(projection).deep.equal(expectedProjection);
+                        });
+
+                    });
+                    describe('mutable input', () => {
+                        beforeEach(() => {
+                            projector = GeojsonProjector({from: 'EPSG:4326', to: projectTo, immutable: false});
+                        });
+                        it ('should return new projected instance for each call', () => {
+                            let projection1 = projector(source);
+                            let projection2 = projector(source);
+                            expect(projection2).to.not.equal(projection1);
+                        });
+
+                        it('should return same projected values for same input values', () => {
+                            let projection1 = projector(source);
+                            let projection2 = projector(source instanceof Array ? source.slice() : {...source});
+                            expect(projection2).deep.equal(projection1);
+                        });
+
+                        it('should produce valid projections', () => {
+                            let projection = projector(source);
+                            expect(projection).deep.equal(expectedProjection);
+                        });
+
+                    });
+                });
+            });
+        });
     });
 });
