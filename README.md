@@ -1,5 +1,7 @@
 # geojson-projector
-Fast projector for immutable geojson
+Fast projector for immutable geojson. It can project any branch of geojson object.
+
+`geojson-projector` can produce the cacheing of projected values which is a good point while one is using immutable data flow.
 
 ### Instalation
 ```bash
