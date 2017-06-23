@@ -1,6 +1,6 @@
 {
   "name": "geojson-projector",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Fast projector for immutable geojson",
   "main": "./dist/geojson-projector.js",
   "scripts": {
