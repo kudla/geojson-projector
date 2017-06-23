@@ -60,7 +60,11 @@ In case of immutable input geojson mode projector produce cacheing of output res
 import {isEqual, clone} from 'lodash';
 import {GeojsonProjector} from 'gojson-projector';
 
-let project = GeojsonProjector({from: 'EPSG:4326', to: 'EPSG:3857', immutable = true);
+let project = GeojsonProjector({
+    from: 'EPSG:4326',
+    to: 'EPSG:3857',
+    immutable: true
+});
 let geometry = project({
     "type": "Point",
     "coordinates": [-122.416667, 37.783333]
@@ -79,8 +83,11 @@ In case of mutable input geojson mode projector produce a new calculation per ea
 import {isEqual, clone} from 'lodash';
 import {GeojsonProjector} from 'gojson-projector';
 
-let project = GeojsonProjector({from: 'EPSG:4326', to: 'EPSG:3857', immutable = false);
-let geometry = project({
+let project = GeojsonProjector({
+    from: 'EPSG:4326',
+    to: 'EPSG:3857',
+    immutable: false
+});let geometry = project({
     "type": "Point",
     "coordinates": [-122.416667, 37.783333]
 });
