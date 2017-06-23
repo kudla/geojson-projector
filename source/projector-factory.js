@@ -1,5 +1,13 @@
 import proj4 from 'proj4';
 
+const TRANSFORMED_PROPS = [
+    'features',
+    'geometry',
+    'geometries',
+    'bbox',
+    'coordinates'
+];
+
 export default function ProjectorFactory(options) {
     let {from, to, immutable = true} = options;
     let projections = immutable ? new WeakMap() : undefined;
@@ -9,32 +17,29 @@ export default function ProjectorFactory(options) {
 
         if (!projection) {
             if (source instanceof Array) {
-                if (source[0] instanceof Array) {
-                    projection = source.map(project);
-                } else {
+                if (typeof source[0] === 'number') {
                     projection = proj4(from, to, source.slice());
+                } else {
+                    projection = source.map(project);
                 }
             } else {
                 let {type} = source;
                 switch(type) {
-                    case 'FeatureCollection': {
-                        let {features} = source;
-                        features = features.map(project);
-                        projection = {...source, features};
-                        break;
-                    }
-                    case 'Feature': {
-                        let {geometry} = source;
-                        geometry = project(geometry);
-                        projection = {...source, geometry};
-                        break;
-                    }
+                    case 'GeometryCollection':
+                    case 'FeatureCollection':
+                    case 'Feature':
                     case 'Point':
+                    case 'MultiPoint':
                     case 'Polygon':
-                    case 'LineString': {
-                        let {coordinates} = source;
-                        coordinates = project(coordinates);
-                        projection = {...source, coordinates};
+                    case 'MultiPolygon':
+                    case 'LineString':
+                    case 'MultiLineString': {
+                        projection = {...source};
+                        for(let prop of TRANSFORMED_PROPS) {
+                            if (prop in projection) {
+                                projection[prop] = project(projection[prop]);
+                            }
+                        }
                         break;
                     }
                     default: {
