@@ -1,5 +1,5 @@
 # geojson-projector
-Fast projector for immutable geojson. It can project any branch of geojson object.
+Fast projector for immutable GeoJSON. It can project any branch of GeoJSON object.
 
 `geojson-projector` can produce the cacheing of projected values which is a good point while one is using immutable data flow.
 
@@ -56,8 +56,8 @@ let geojson = project({
 })
 ```
 
-### Immutable input geojson mode
-In case of immutable input geojson mode projector produce cacheing of output results based upon input source instance. Immutable input geojson mode is used by default.
+### Immutable input GeoJSON mode
+In case of immutable input GeoJSON mode projector produce cacheing of output results based upon input source instance. Immutable input GeoJSON mode is used by default.
 ```js
 import {isEqual, clone} from 'lodash';
 import {GeojsonProjector} from 'gojson-projector';
@@ -79,8 +79,8 @@ console.log(projection1 === projection2); // true
 console.log(projection1 !== projectionOfClone); // true
 console.log(isEqual(projection1, projectionOfClone)); // true
 ```
-### Mutable input geojson mode
-In case of mutable input geojson mode projector produce a new calculation per each project call.
+### Mutable input GeoJSON mode
+In case of mutable input GeoJSON mode projector produce a new calculation per each project call.
 ```js
 import {isEqual, clone} from 'lodash';
 import {GeojsonProjector} from 'gojson-projector';
