@@ -1,4 +1,4 @@
-import GeojsonProjector from '../dist/geojson-projector';
+import GeojsonProjector from '../../dist/geojson-projector';
 import { expect } from 'chai';
 
 describe('GeojsonProjector', () => {
@@ -44,7 +44,7 @@ describe('GeojsonProjector', () => {
         describe(`${sourceCase}`, () => {
             let source;
             beforeEach(() => {
-                source = require(`../test/cases/${sourceCase}/source`);
+                source = require(`../fixtures/${sourceCase}/source`);
             });
             projections.forEach(projectTo => {
                 describe(`to ${projectTo} projection`, () => {
@@ -52,7 +52,7 @@ describe('GeojsonProjector', () => {
                     let expectedProjection;
 
                     beforeEach(() => {
-                        expectedProjection = require(`../test/cases/${sourceCase}/${projectTo.replace(':', '-').toLowerCase()}`);
+                        expectedProjection = require(`../fixtures/${sourceCase}/${projectTo.replace(':', '-').toLowerCase()}`);
                     });
 
                     describe('imutable input', () => {

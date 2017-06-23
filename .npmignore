@@ -1,3 +1,2 @@
 source
-test/**/*.js
-test/*.js
+test/specs

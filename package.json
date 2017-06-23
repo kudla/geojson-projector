@@ -6,9 +6,9 @@
   "scripts": {
     "eslint": "eslint .",
     "build:source": "babel source --out-dir dist",
-    "build:tests": "babel test --out-dir test-dist",
+    "build:tests": "babel test/specs --out-dir test/dist",
     "build": "npm run build:source && npm run build:tests",
-    "test": "node node_modules/mocha/bin/mocha --reporter spec test-dist/*"
+    "test": "node node_modules/mocha/bin/mocha --reporter spec test/dist/*"
   },
   "repository": {
     "type": "git",

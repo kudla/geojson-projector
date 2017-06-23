@@ -3,7 +3,7 @@ Fast projector for immutable geojson
 
 ### Instalation
 ```bash
-npm install geojson-projector
+npm install --save geojson-projector
 ```
 
 ### Usage
