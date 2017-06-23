@@ -18,7 +18,12 @@ export default function ProjectorFactory(options) {
         if (!projection) {
             if (source instanceof Array) {
                 if (typeof source[0] === 'number') {
-                    projection = proj4(from, to, source.slice());
+                    projection = source.slice();
+                    for(let position=0;position<projection.length;position+=2) {
+                        let point = proj4(from, to, projection.slice(position, position+2));
+                        projection[position] = point[0];
+                        projection[position+1] = point[1];
+                    }
                 } else {
                     projection = source.map(project);
                 }

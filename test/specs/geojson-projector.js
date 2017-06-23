@@ -34,10 +34,16 @@ describe('GeojsonProjector', () => {
         'coordinate set',
         'coordinate multiset',
         'point',
+        'multi-point',
         'line-string',
+        'multi-line-string',
         'polygon',
+        'multi-polygon',
+        'geometry collection',
         'feature',
-        'feature collection'
+        'feature bbox',
+        'feature collection',
+        'feature collection bbox'
     ];
     let projections = ['EPSG:3857'];
     cases.forEach(sourceCase => {
