@@ -87,7 +87,8 @@ let project = GeojsonProjector({
     from: 'EPSG:4326',
     to: 'EPSG:3857',
     immutable: false
-});let geometry = project({
+});
+let geometry = project({
     "type": "Point",
     "coordinates": [-122.416667, 37.783333]
 });
