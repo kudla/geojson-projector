@@ -1,7 +1,7 @@
 {
   "name": "geojson-projector",
   "version": "0.0.8",
-  "description": "Fast projector for immutable geojson",
+  "description": "Fast projector for immutable GeoJSON",
   "main": "./dist/geojson-projector.js",
   "scripts": {
     "eslint": "eslint .",
