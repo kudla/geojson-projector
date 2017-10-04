@@ -11,7 +11,7 @@ npm install --save geojson-projector
 ### Usage
 
 ```js
-import GeojsonProjector from 'gojson-projector';
+import GeojsonProjector from 'geojson-projector';
 let project = GeojsonProjector('EPSG:4326', 'EPSG:3857');
 
 // use cases
