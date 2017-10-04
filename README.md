@@ -60,7 +60,7 @@ let geojson = project({
 In case of immutable input GeoJSON mode projector produce cacheing of output results based upon input source instance. Immutable input GeoJSON mode is used by default.
 ```js
 import {isEqual, clone} from 'lodash';
-import {GeojsonProjector} from 'gojson-projector';
+import {GeojsonProjector} from 'geojson-projector';
 
 let project = GeojsonProjector({
     from: 'EPSG:4326',
